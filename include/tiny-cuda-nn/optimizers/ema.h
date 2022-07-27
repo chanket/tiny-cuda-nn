@@ -96,8 +96,10 @@ public:
 		m_weights_ema.resize(size);
 		m_weights_ema.memset(0);
 
-		m_tmp.resize(size);
-		m_tmp.memset(0);
+		if (m_full_precision) {
+			m_tmp.resize(size);
+			m_tmp.memset(0);
+		}
 	}
 
 	void step(cudaStream_t stream, float loss_scale, float* weights_full_precision, T* weights, const T* gradients) override {
